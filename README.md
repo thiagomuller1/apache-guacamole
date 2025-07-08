@@ -1,15 +1,19 @@
-Tutorial de instalação do Apache Guacamole + Gravador de sessão
+# **Tutorial de instalação do Apache Guacamole + Gravador de sessão**
 
-Introdução
+## **Introdução**
 O Apache Guacamole é um gateway de desktop remoto sem cliente que suporta protocolos padrão como VNC, RDP e SSH. Ele permite que os usuários acessem seus desktops remotamente usando apenas um navegador web, sem a necessidade de softwares ou plugins adicionais. Esta ferramenta poderosa é inestimável para administradores de sistemas e profissionais de TI que precisam gerenciar e acessar múltiplos sistemas com segurança e eficiência a partir de um local central. A interface web do Guacamole garante acessibilidade a partir de qualquer dispositivo com conexão à internet, tornando o trabalho remoto e o gerenciamento de sistemas mais flexíveis e convenientes.
 
 Etapas completas para instalar o Apache Guacamole no Ubuntu 22.04
 Antes de iniciar a instalação, certifique-se de estar logado como usuário root ou não root com privilégios sudo. As etapas a seguir guiarão você por todo o processo de instalação, incluindo a configuração do acesso SSH com uma máquina virtual (VM).
 
-Etapa 1 — Instalar pacotes e dependências necessários
-Atualizar os pacotes do sistema: sudo apt update
+### **Etapa 1 — Instalar pacotes e dependências necessários**
+Atualizar os pacotes do sistema: 
+```bash
+sudo apt update
+```
 ![image](https://github.com/user-attachments/assets/1b3b8b9a-b451-45b2-929b-5e251647790e)
-Em seguida, use o seguinte comando para instalar os pacotes e dependências necessários para a instalação do Guacamole:
+**Em seguida, use o seguinte comando para instalar os pacotes e dependências necessários para a instalação do Guacamole:**
+```bash
 sudo apt install -y \
   build-essential \
   libcairo2-dev \
@@ -31,12 +35,15 @@ sudo apt install -y \
   libavcodec-dev \
   libavutil-dev \
   libavformat-dev
+```
 ![image](https://github.com/user-attachments/assets/fafe63fa-f961-4971-8615-235a5270ad20)
-Quando terminar, prossiga para a próxima etapa para baixar e instalar o Apache Guacamole no Ubuntu 22.04.
+**Quando terminar, prossiga para a próxima etapa para baixar e instalar o Apache Guacamole no Ubuntu 22.04.**
 
-Etapa 2 — Baixe e instale o Apache Guacamole a partir da fonte (https://downloads.apache.org/guacamole/)
-Neste ponto, você deve visitar a página oficial de downloads e usar o seguinte comando wget para baixar o pacote de origem mais recente do Apache Guacamole :
+### **Etapa 2 — Baixe e instale o Apache Guacamole a partir da fonte (https://downloads.apache.org/guacamole/)**
+**Neste ponto, você deve visitar a página oficial de downloads e usar o seguinte comando wget para baixar o pacote de origem mais recente do Apache Guacamole :**
+```bash
 sudo wget https://downloads.apache.org/guacamole/1.6.0/source/guacamole-server-1.6.0.tar.gz
+```
 ![image](https://github.com/user-attachments/assets/cade8936-6dbd-4d31-a93e-0242e936a113)
 
 Em seguida, extraia o pacote de download e navegue até o diretório do Apache Guacamole com os seguintes comandos:
