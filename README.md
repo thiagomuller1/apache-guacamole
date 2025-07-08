@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/3433e324-9b2c-4df0-af75-3fefcc3b9546)Tutorial de instalação do Apache Guacamole + Gravador de sessão
+Tutorial de instalação do Apache Guacamole + Gravador de sessão
 
 Introdução
 O Apache Guacamole é um gateway de desktop remoto sem cliente que suporta protocolos padrão como VNC, RDP e SSH. Ele permite que os usuários acessem seus desktops remotamente usando apenas um navegador web, sem a necessidade de softwares ou plugins adicionais. Esta ferramenta poderosa é inestimável para administradores de sistemas e profissionais de TI que precisam gerenciar e acessar múltiplos sistemas com segurança e eficiência a partir de um local central. A interface web do Guacamole garante acessibilidade a partir de qualquer dispositivo com conexão à internet, tornando o trabalho remoto e o gerenciamento de sistemas mais flexíveis e convenientes.
