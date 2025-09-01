@@ -432,7 +432,39 @@ Porta 443 (HTTPS) → Source: Any → Destination: VM → Protocol: TCP
 **Bloqueie a conexão RDP, porta 3389 em todos os seus servidores (Se for no Azure faça o ajuste no NSG)**
 <img width="567" height="693" alt="image" src="https://github.com/user-attachments/assets/84fd872c-21e6-4cb2-8e7e-86fea41695c8" />
 
+### **Etapa 13 - Ativando MFA para Login no Portal Guacamole**
+**Baixe a versão do guacamole-auth-totp-1.6.0.tar.gz, conforme seu ambiente** 
+Documentação Oficial: 
+```bash 
+https://guacamole.apache.org/doc/gug/totp-auth.html
+```
+**Baixe guacamole-auth-totp-1.6.0.tar.gza partir da página de lançamento do Apache Guacamole 1.6.0 e extraia-o.**
 
+**Crie o GUACAMOLE_HOME/extensionsdiretório, se ele ainda não existir.**
+
+**Copie o guacamole-auth-totp-1.6.0.jararquivo do conteúdo do arquivo para GUACAMOLE_HOME/extensions/.**
+
+### **Como o TOTP funciona com o Guacamole**
+**O Guacamole oferece suporte para TOTP como um segundo fator de autenticação. Para usar a extensão de autenticação TOTP, algum outro mecanismo de autenticação também precisará ser configurado. Quando um usuário tenta fazer login no Guacamole, outros métodos de autenticação instalados serão consultados primeiro:**
+<img width="334" height="361" alt="image" src="https://github.com/user-attachments/assets/22fb7844-f4e2-42d0-855a-aee4e7ca0d44" />
+
+**Somente após a autenticação bem-sucedida com um desses métodos o Guacamole solicitará que o usuário verifique sua identidade com um código de autenticação:**
+<img width="633" height="269" alt="image" src="https://github.com/user-attachments/assets/139962a2-23f1-4578-80d5-dbc45b2dc676" />
+
+**Se a tentativa de autenticação inicial e a verificação usando TOTP forem bem-sucedidas, o usuário será autorizado a entrar. Se qualquer um dos mecanismos falhar, o acesso ao Guacamole será negado.**
+
+**Forma de inscrição:**
+**Caso o usuário ainda não tenha uma chave TOTP associada à sua conta (ainda não tenha concluído o cadastro), será necessário cadastrar um dispositivo de autenticação após passar pelo primeiro fator de autenticação. Um código QR contendo uma chave gerada automaticamente será apresentado ao usuário para ser escaneado pelo aplicativo ou dispositivo de autenticação:**
+<img width="625" height="706" alt="image" src="https://github.com/user-attachments/assets/53d7fdd0-e863-4e53-b102-42b8b16522e7" />
+
+**Se o dispositivo de autenticação não suportar a leitura de códigos QR para inscrição, os detalhes contidos no código QR poderão ser exibidos clicando no link "Mostrar" ao lado do cabeçalho "Detalhes". Os seguintes valores poderão ser inseridos manualmente:**
+<img width="612" height="817" alt="image" src="https://github.com/user-attachments/assets/268eb4f9-4ec7-4ef7-b489-1a252297a182" />
+
+**O registro é concluído quando o usuário insere um código de autenticação válido gerado pelo seu dispositivo usando a chave fornecida.**
+
+**Importante**
+
+**Se o usuário não confirmar/concluir o processo de cadastro, na próxima vez que efetuar login, será solicitado que passe pelo processo de cadastro novamente, e os dados do TOTP serão gerados novamente. Isso significa que o código QR escaneado anteriormente e os códigos TOTP gerados com o uso desse código serão inválidos.**
 
 #**Fim!**
 
