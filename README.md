@@ -362,6 +362,77 @@ sudo systemctl restart tomcat9
 
 ![image](https://github.com/user-attachments/assets/c4c12343-c4da-4ad5-b08a-fc9112f5488e)
 
+### **Etapa 12 - Disponibilizando acesso Web via internet**
+
+**Registrar dominio/subdominio apontando para o IP publico do seu servidor**
+**Acesse o local onde hospeda seu dominio e crie a entrada abaixo:**
+```bash
+guacamole    A    SEU_IP_PUBLICO
+```
+
+**Configurar proxy reverso com Apache**
+**Ativar os Modulos Necessarios:**
+```bash
+sudo a2enmod proxy proxy_http proxy_wstunnel
+sudo systemctl restart apache2
+```
+**Crie um arquivo de VirtualHost para o Guacamole:**
+```bash
+sudo nano /etc/apache2/sites-available/guacamole.conf
+```
+**Preencha com:**
+```bash
+<VirtualHost *:80>
+    ServerName guacamole.seudominio.com.br
+
+    ProxyRequests Off
+    ProxyPreserveHost On
+
+    <Location />
+        Require all granted
+        ProxyPass http://localhost:8080/guacamole/ flushpackets=on
+        ProxyPassReverse http://localhost:8080/guacamole/
+    </Location>
+
+    <Location /websocket-tunnel>
+        Require all granted
+        ProxyPass ws://localhost:8080/guacamole/websocket-tunnel
+        ProxyPassReverse ws://localhost:8080/guacamole/websocket-tunnel
+    </Location>
+
+    Header always unset X-Frame-Options
+</VirtualHost>
+```
+
+**Ative o site e reinicie o Apache:**
+```bash
+sudo a2ensite guacamole.conf
+sudo systemctl reload apache2
+```
+**Instalar o CertBot para acesso HTTPS**
+```bash
+sudo apt install certbot python3-certbot-apache -y
+```
+**Depois rode:**
+```bash
+sudo certbot --apache -d guacamole.seudominio.com.br
+```
+**Passos para liberar acesso externo no Azure**:
+
+Acesse o portal do Azure,
+Vá na VM do Guacamole → clique em Networking
+Verifique qual NSG está associado à interface de rede ou subnet da VM
+Adicione inbound rules (entrada) para:
+```bash
+Porta 80 (HTTP) → Source: Any → Destination: VM → Protocol: TCP
+Porta 443 (HTTPS) → Source: Any → Destination: VM → Protocol: TCP
+```
+**Salve e aguarde alguns segundos** 
+
+**Bloqueie a conexão RDP, porta 3389 em todos os seus servidores (Se for no Azure faça o ajuste no NSG)**
+<img width="567" height="693" alt="image" src="https://github.com/user-attachments/assets/84fd872c-21e6-4cb2-8e7e-86fea41695c8" />
+
+
 
 #**Fim!**
 
